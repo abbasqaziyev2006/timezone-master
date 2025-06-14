@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chronosfera | Premium Watches</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --dark: #1a1a1a;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+        }
+        .navbar {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .navbar-brand img {
+            height: 40px;
+        }
+        .hero-section {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1523170335258-f5ed11844a49?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            color: white;
+            margin-bottom: 50px;
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        .section-header p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .product-card {
+            border: none;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        .product-img {
+            height: 250px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .product-card:hover .product-img img {
+            transform: scale(1.05);
+        }
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--gold);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .product-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        .product-price {
+            font-weight: bold;
+            color: var(--dark);
+            font-size: 1.2rem;
+        }
+        .filter-section {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        .filter-group {
+            margin-bottom: 25px;
+        }
+        .filter-group h5 {
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .pagination .page-item.active .page-link {
+            background-color: var(--gold);
+            border-color: var(--gold);
+        }
+        .pagination .page-link {
+            color: var(--dark);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="https://via.placeholder.com/150x50?text=CHRONOSFERA" alt="Chronosfera">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="shop.html">Shop</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-search"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-user"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-shopping-cart"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold mb-4">Premium Watch Collection</h1>
+            <p class="lead mb-5">Timeless designs that defy time</p>
+        </div>
+    </section>
+
+    <!-- Shop Content -->
+    <section class="py-5">
+        <div class="container">
+            <div class="section-header">
+                <h2>Popular Items</h2>
+                <p>Discover our most sought-after timepieces, crafted with precision and style.</p>
+            </div>
+            
+            <div class="row">
+                <!-- Filters -->
+                <div class="col-lg-3">
+                    <div class="filter-section">
+                        <h4 class="mb-4">Filters</h4>
+                        
+                        <div class="filter-group">
+                            <h5>Categories</h5>
+                            <div class="form-check">
+                                <input class="form-check-input category-filter" type="checkbox" id="category-classic" value="classic" checked>
+                                <label class="form-check-label" for="category-classic">Classic</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input category-filter" type="checkbox" id="category-sport" value="sport" checked>
+                                <label class="form-check-label" for="category-sport">Sport</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input category-filter" type="checkbox" id="category-luxury" value="luxury" checked>
+                                <label class="form-check-label" for="category-luxury">Luxury</label>
+                            </div>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <h5>Price Range</h5>
+                            <input type="range" class="form-range" min="0" max="5000" step="100" id="priceRange" value="5000">
+                            <div class="d-flex justify-content-between mt-2">
+                                <span>$0</span>
+                                <span id="maxPrice">$5000</span>
+                            </div>
+                        </div>
+                        
+                        <button class="btn btn-dark w-100 mt-3" id="applyFilters">Apply Filters</button>
+                    </div>
+                </div>
+                
+                <!-- Products -->
+                <div class="col-lg-9">
+                    <div class="row" id="productContainer">
+                        <!-- Products will be loaded here by JavaScript -->
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <nav aria-label="Page navigation" class="mt-5">
+                        <ul class="pagination justify-content-center" id="pagination">
+                            <!-- Pagination will be loaded here by JavaScript -->
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <img src="https://via.placeholder.com/150x50?text=CHRONOSFERA" alt="Chronosfera" class="mb-3">
+                    <p>Chronosfera is a luxury brand that creates timepieces that defy time. Each watch is a fusion of craftsmanship and passion.</p>
+                </div>
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Home</a></li>
+                        <li><a href="#" class="text-white">Shop</a></li>
+                        <li><a href="#" class="text-white">About</a></li>
+                        <li><a href="#" class="text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h5>Contact</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-map-marker-alt me-2"></i> 123 Watch Street, Geneva</li>
+                        <li><i class="fas fa-phone me-2"></i> +41 22 123 45 67</li>
+                        <li><i class="fas fa-envelope me-2"></i> info@chronosfera.com</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="text-center">
+                <p class="mb-0">&copy; 2023 Chronosfera. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Product data
+        const products = [
+            { id: 1, name: "Elegance Silver", price: 520, category: "classic", image: "https://images.unsplash.com/photo-1524805444758-089113d48a6d?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" },
+            { id: 2, name: "Black Premium", price: 490, category: "sport", image: "https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" },
+            { id: 3, name: "Golden Classic", price: 750, category: "luxury", image: "https://images.unsplash.com/photo-1551818255-e6e10975bc17?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" },
+            { id: 4, name: "Modern Steel", price: 650, category: "classic", image: "https://images.unsplash.com/photo-1539874754764-5a96559165b0?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" },
+            { id: 5, name: "Chrono Pro", price: 890, category: "sport", image: "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" },
+            { id: 6, name: "Royal Gold", price: 1200, category: "luxury", image: "https://images.unsplash.com/photo-1548169874-53e85f753f1e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" },
+            { id: 7, name: "Vintage Brown", price: 580, category: "classic", image: "https://images.unsplash.com/photo-1524592714635-d77511a4834d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" },
+            { id: 8, name: "Diver Black", price: 920, category: "sport", image: "https://images.unsplash.com/photo-1557531365-e8b9c839e8b6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" },
+            { id: 9, name: "Platinum Elite", price: 1500, category: "luxury", image: "https://images.unsplash.com/photo-1556740734-9f9ca6f5f2c1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" },
+            { id: 10, name: "Classic White", price: 480, category: "classic", image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" },
+            { id: 11, name: "Racing Red", price: 670, category: "sport", image: "https://images.unsplash.com/photo-1524805444758-089113d48a6d?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" },
+            { id: 12, name: "Diamond Gold", price: 2200, category: "luxury", image: "https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" }
+        ];
+
+        // Current page and items per page
+        let currentPage = 1;
+        const itemsPerPage = 6;
+
+        // DOM elements
+        const productContainer = document.getElementById('productContainer');
+        const pagination = document.getElementById('pagination');
+        const priceRange = document.getElementById('priceRange');
+        const maxPriceDisplay = document.getElementById('maxPrice');
+        const applyFiltersBtn = document.getElementById('applyFilters');
+        const categoryFilters = document.querySelectorAll('.category-filter');
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            displayProducts();
+            displayPagination();
+            
+            // Update max price display when slider changes
+            priceRange.addEventListener('input', function() {
+                maxPriceDisplay.textContent = '$' + this.value;
+            });
+            
+            // Apply filters when button clicked
+            applyFiltersBtn.addEventListener('click', function() {
+                currentPage = 1;
+                displayProducts();
+                displayPagination();
+            });
+        });
+
+        // Display products based on filters and current page
+        function displayProducts() {
+            const maxPrice = parseInt(priceRange.value);
+            const selectedCategories = getSelectedCategories();
+            
+            // Filter products
+            const filteredProducts = products.filter(product => {
+                return product.price <= maxPrice && 
+                       selectedCategories.includes(product.category);
+            });
+            
+            // Get products for current page
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const productsToDisplay = filteredProducts.slice(startIndex, endIndex);
+            
+            // Clear container
+            productContainer.innerHTML = '';
+            
+            // Display products
+            if (productsToDisplay.length === 0) {
+                productContainer.innerHTML = '<div class="col-12 text-center"><p>No products match your filters.</p></div>';
+            } else {
+                productsToDisplay.forEach(product => {
+                    productContainer.innerHTML += `
+                        <div class="col-md-4 col-sm-6">
+                            <div class="product-card">
+                                <div class="product-img">
+                                    <img src="${product.image}" alt="${product.name}">
+                                </div>
+                                <div class="product-info">
+                                    <h3>${product.name}</h3>
+                                    <div class="product-price">$${product.price}</div>
+                                    <button class="btn btn-dark mt-3">Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+        }
+
+        // Display pagination
+        function displayPagination() {
+            const maxPrice = parseInt(priceRange.value);
+            const selectedCategories = getSelectedCategories();
+            
+            // Filter products
+            const filteredProducts = products.filter(product => {
+                return product.price <= maxPrice && 
+                       selectedCategories.includes(product.category);
+            });
+            
+            const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+            
+            // Clear pagination
+            pagination.innerHTML = '';
+            
+            // Previous button
+            pagination.innerHTML += `
+                <li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
+                    <a class="page-link" href="#" onclick="changePage(${currentPage - 1})">Previous</a>
+                </li>
+            `;
+            
+            // Page numbers
+            for (let i = 1; i <= totalPages; i++) {
+                pagination.innerHTML += `
+                    <li class="page-item ${i === currentPage ? 'active' : ''}">
+                        <a class="page-link" href="#" onclick="changePage(${i})">${i}</a>
+                    </li>
+                `;
+            }
+            
+            // Next button
+            pagination.innerHTML += `
+                <li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
+                    <a class="page-link" href="#" onclick="changePage(${currentPage + 1})">Next</a>
+                </li>
+            `;
+        }
+
+        // Change page
+        function changePage(page) {
+            currentPage = page;
+            displayProducts();
+            displayPagination();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Get selected categories
+        function getSelectedCategories() {
+            const selected = [];
+            categoryFilters.forEach(filter => {
+                if (filter.checked) {
+                    selected.push(filter.value);
+                }
+            });
+            return selected;
+        }
+    </script>
+</body>
+</html>
