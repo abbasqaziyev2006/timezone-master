@@ -1,0 +1,604 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Watch Shop | Premium Timepieces</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --gold: #D4AF37;
+      --dark: #1a1a1a;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .navbar {
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .hero-section {
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                  url('https://images.unsplash.com/photo-1523170335258-f5ed11844a49?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+      background-size: cover;
+      background-position: center;
+      height: 60vh;
+      color: white;
+      display: flex;
+      align-items: center;
+    }
+    .product-card {
+      border: 1px solid #eee;
+      border-radius: 8px;
+      overflow: hidden;
+      transition: all 0.3s;
+      margin-bottom: 30px;
+    }
+    .product-card:hover {
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      transform: translateY(-5px);
+    }
+    .product-img {
+      height: 200px;
+      overflow: hidden;
+    }
+    .product-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+    .product-card:hover .product-img img {
+      transform: scale(1.05);
+    }
+    .product-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: var(--gold);
+      color: white;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+    .cart-notification {
+      position: fixed;
+      top: 100px;
+      right: 20px;
+      background: #4CAF50;
+      color: white;
+      padding: 15px;
+      border-radius: 5px;
+      display: none;
+      z-index: 1000;
+      animation: fadeIn 0.5s, fadeOut 0.5s 2.5s;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+    @keyframes fadeOut {
+      from {opacity: 1;}
+      to {opacity: 0;}
+    }
+    .cart-count {
+      background: var(--gold);
+      color: white;
+      border-radius: 50%;
+      padding: 0 5px;
+      font-size: 12px;
+      position: relative;
+      top: -10px;
+      right: 5px;
+    }
+    .cart-item-img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+  <!-- Cart Notification -->
+  <div class="cart-notification" id="cartNotification">
+    Item added to cart!
+  </div>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <i class="fas fa-clock me-2"></i>WatchShop
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="shop.html">Shop</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="cart.html">
+              <i class="fas fa-shopping-cart"></i>
+              <span class="cart-count" id="cartCount">0</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content (changes based on page) -->
+  <div id="pageContent">
+    <!-- Home Page Content -->
+    <div id="homePage">
+      <section class="hero-section">
+        <div class="container text-center">
+          <h1 class="display-4 fw-bold mb-4">Premium Watch Collection</h1>
+          <p class="lead mb-5">Timeless designs that defy time</p>
+          <a href="shop.html" class="btn btn-primary btn-lg">Shop Now</a>
+        </div>
+      </section>
+
+      <section class="py-5">
+        <div class="container">
+          <h2 class="text-center mb-5">Featured Products</h2>
+          <div class="row">
+            <!-- Product 1 -->
+            <div class="col-md-4 mb-4">
+              <div class="product-card">
+                <div class="product-img position-relative">
+                  <img src="https://images.unsplash.com/photo-1524805444758-089113d48a6d?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Elegance Silver">
+                  <span class="product-badge">New</span>
+                </div>
+                <div class="card-body">
+                  <h5>Elegance Silver</h5>
+                  <p class="text-muted">Classic Collection</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <span class="fw-bold">$520.00</span>
+                    <button class="btn btn-sm btn-dark" onclick="addToCart({
+                      id: 1, 
+                      name: 'Elegance Silver', 
+                      price: 520, 
+                      image: 'https://images.unsplash.com/photo-1524805444758-089113d48a6d?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80'
+                    })">Add to Cart</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Product 2 -->
+            <div class="col-md-4 mb-4">
+              <div class="product-card">
+                <div class="product-img position-relative">
+                  <img src="https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Black Premium">
+                </div>
+                <div class="card-body">
+                  <h5>Black Premium</h5>
+                  <p class="text-muted">Sport Collection</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <span class="fw-bold">$490.00</span>
+                    <button class="btn btn-sm btn-dark" onclick="addToCart({
+                      id: 2, 
+                      name: 'Black Premium', 
+                      price: 490, 
+                      image: 'https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'
+                    })">Add to Cart</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Product 3 -->
+            <div class="col-md-4 mb-4">
+              <div class="product-card">
+                <div class="product-img position-relative">
+                  <img src="https://images.unsplash.com/photo-1551818255-e6e10975bc17?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Golden Classic">
+                  <span class="product-badge">Luxury</span>
+                </div>
+                <div class="card-body">
+                  <h5>Golden Classic</h5>
+                  <p class="text-muted">Luxury Collection</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <span class="fw-bold">$750.00</span>
+                    <button class="btn btn-sm btn-dark" onclick="addToCart({
+                      id: 3, 
+                      name: 'Golden Classic', 
+                      price: 750, 
+                      image: 'https://images.unsplash.com/photo-1551818255-e6e10975bc17?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'
+                    })">Add to Cart</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 mb-4 mb-md-0">
+          <h5>WatchShop</h5>
+          <p>Premium watches crafted with precision and passion.</p>
+        </div>
+        <div class="col-md-4 mb-4 mb-md-0">
+          <h5>Quick Links</h5>
+          <ul class="list-unstyled">
+            <li><a href="index.html" class="text-white">Home</a></li>
+            <li><a href="shop.html" class="text-white">Shop</a></li>
+            <li><a href="about.html" class="text-white">About</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h5>Contact</h5>
+          <ul class="list-unstyled">
+            <li><i class="fas fa-map-marker-alt me-2"></i> 123 Watch Street, Geneva</li>
+            <li><i class="fas fa-phone me-2"></i> +41 22 123 45 67</li>
+            <li><i class="fas fa-envelope me-2"></i> info@watchshop.com</li>
+          </ul>
+        </div>
+      </div>
+      <hr class="my-4">
+      <div class="text-center">
+        <p class="mb-0">&copy; 2023 WatchShop. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cart Modal -->
+  <div class="modal fade" id="cartModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Your Cart</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Price</th>
+                  <th>Quantity</th>
+                  <th>Total</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="cartItems">
+                <!-- Cart items will be inserted here -->
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="3" class="text-end"><strong>Subtotal:</strong></td>
+                  <td id="cartSubtotal">$0.00</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td colspan="3" class="text-end"><strong>Shipping:</strong></td>
+                  <td id="cartShipping">$5.00</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td colspan="3" class="text-end"><strong>Total:</strong></td>
+                  <td id="cartTotal">$5.00</td>
+                  <td></td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Continue Shopping</button>
+          <a href="checkout.html" class="btn btn-primary">Proceed to Checkout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Checkout Page (hidden by default) -->
+  <div id="checkoutPage" style="display: none;">
+    <section class="py-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+            <h2 class="mb-4">Checkout</h2>
+            <div class="card mb-4">
+              <div class="card-header">
+                <h5>Shipping Information</h5>
+              </div>
+              <div class="card-body">
+                <form id="checkoutForm">
+                  <div class="mb-3">
+                    <label for="fullName" class="form-label">Full Name</label>
+                    <input type="text" class="form-control" id="fullName" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="address" class="form-label">Address</label>
+                    <input type="text" class="form-control" id="address" required>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <label for="city" class="form-label">City</label>
+                      <input type="text" class="form-control" id="city" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label for="zip" class="form-label">ZIP Code</label>
+                      <input type="text" class="form-control" id="zip" required>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="card-header">
+                <h5>Payment Information</h5>
+              </div>
+              <div class="card-body">
+                <div class="mb-3">
+                  <label class="form-label">Payment Method</label>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="paymentMethod" id="creditCard" checked>
+                    <label class="form-check-label" for="creditCard">Credit Card</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="paymentMethod" id="paypal">
+                    <label class="form-check-label" for="paypal">PayPal</label>
+                  </div>
+                </div>
+                
+                <div id="creditCardForm">
+                  <div class="mb-3">
+                    <label for="cardNumber" class="form-label">Card Number</label>
+                    <input type="text" class="form-control" id="cardNumber" placeholder="1234 5678 9012 3456">
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <label for="expiry" class="form-label">Expiry Date</label>
+                      <input type="text" class="form-control" id="expiry" placeholder="MM/YY">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label for="cvv" class="form-label">CVV</label>
+                      <input type="text" class="form-control" id="cvv" placeholder="123">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-header">
+                <h5>Order Summary</h5>
+              </div>
+              <div class="card-body">
+                <div id="checkoutItems">
+                  <!-- Order items will be inserted here -->
+                </div>
+                <hr>
+                <div class="d-flex justify-content-between mb-2">
+                  <span>Subtotal:</span>
+                  <span id="checkoutSubtotal">$0.00</span>
+                </div>
+                <div class="d-flex justify-content-between mb-2">
+                  <span>Shipping:</span>
+                  <span id="checkoutShipping">$5.00</span>
+                </div>
+                <hr>
+                <div class="d-flex justify-content-between fw-bold">
+                  <span>Total:</span>
+                  <span id="checkoutTotal">$5.00</span>
+                </div>
+                <button type="submit" form="checkoutForm" class="btn btn-primary w-100 mt-3">Place Order</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Cart functionality
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    
+    // Update cart count
+    function updateCartCount() {
+      const count = cart.reduce((total, item) => total + item.quantity, 0);
+      document.getElementById('cartCount').textContent = count;
+    }
+    
+    // Add to cart
+    function addToCart(product) {
+      const existingItem = cart.find(item => item.id === product.id);
+      
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        cart.push({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          image: product.image,
+          quantity: 1
+        });
+      }
+      
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartCount();
+      
+      // Show notification
+      const notification = document.getElementById('cartNotification');
+      notification.style.display = 'block';
+      setTimeout(() => {
+        notification.style.display = 'none';
+      }, 3000);
+    }
+    
+    // Display cart items in modal
+    function displayCartItems() {
+      const cartItemsEl = document.getElementById('cartItems');
+      const subtotalEl = document.getElementById('cartSubtotal');
+      const shippingEl = document.getElementById('cartShipping');
+      const totalEl = document.getElementById('cartTotal');
+      
+      cartItemsEl.innerHTML = '';
+      
+      if (cart.length === 0) {
+        cartItemsEl.innerHTML = '<tr><td colspan="5" class="text-center">Your cart is empty</td></tr>';
+        subtotalEl.textContent = '$0.00';
+        shippingEl.textContent = '$0.00';
+        totalEl.textContent = '$0.00';
+        return;
+      }
+      
+      let subtotal = 0;
+      
+      cart.forEach((item, index) => {
+        const itemTotal = item.price * item.quantity;
+        subtotal += itemTotal;
+        
+        cartItemsEl.innerHTML += `
+          <tr>
+            <td>
+              <div class="d-flex align-items-center">
+                <img src="${item.image}" alt="${item.name}" class="cart-item-img me-3">
+                <span>${item.name}</span>
+              </div>
+            </td>
+            <td>$${item.price.toFixed(2)}</td>
+            <td>
+              <div class="input-group" style="width: 120px;">
+                <button class="btn btn-outline-secondary" type="button" onclick="updateCartItem(${index}, -1)">-</button>
+                <input type="text" class="form-control text-center" value="${item.quantity}">
+                <button class="btn btn-outline-secondary" type="button" onclick="updateCartItem(${index}, 1)">+</button>
+              </div>
+            </td>
+            <td>$${itemTotal.toFixed(2)}</td>
+            <td>
+              <button class="btn btn-danger btn-sm" onclick="removeCartItem(${index})">
+                <i class="fas fa-trash"></i>
+              </button>
+            </td>
+          </tr>
+        `;
+      });
+      
+      const shipping = 5.00;
+      const total = subtotal + shipping;
+      
+      subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
+      shippingEl.textContent = `$${shipping.toFixed(2)}`;
+      totalEl.textContent = `$${total.toFixed(2)}`;
+      
+      // Also update checkout page if it's visible
+      if (document.getElementById('checkoutPage').style.display !== 'none') {
+        updateCheckoutPage();
+      }
+    }
+    
+    // Update cart item quantity
+    function updateCartItem(index, change) {
+      const newQuantity = cart[index].quantity + change;
+      
+      if (newQuantity < 1) {
+        removeCartItem(index);
+        return;
+      }
+      
+      cart[index].quantity = newQuantity;
+      saveCart();
+      displayCartItems();
+    }
+    
+    // Remove cart item
+    function removeCartItem(index) {
+      cart.splice(index, 1);
+      saveCart();
+      displayCartItems();
+      updateCartCount();
+    }
+    
+    // Save cart to localStorage
+    function saveCart() {
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+    
+    // Update checkout page
+    function updateCheckoutPage() {
+      const checkoutItemsEl = document.getElementById('checkoutItems');
+      const checkoutSubtotalEl = document.getElementById('checkoutSubtotal');
+      const checkoutShippingEl = document.getElementById('checkoutShipping');
+      const checkoutTotalEl = document.getElementById('checkoutTotal');
+      
+      checkoutItemsEl.innerHTML = '';
+      
+      let subtotal = 0;
+      
+      cart.forEach(item => {
+        const itemTotal = item.price * item.quantity;
+        subtotal += itemTotal;
+        
+        checkoutItemsEl.innerHTML += `
+          <div class="d-flex justify-content-between mb-2">
+            <span>${item.name} × ${item.quantity}</span>
+            <span>$${itemTotal.toFixed(2)}</span>
+          </div>
+        `;
+      });
+      
+      const shipping = 5.00;
+      const total = subtotal + shipping;
+      
+      checkoutSubtotalEl.textContent = `$${subtotal.toFixed(2)}`;
+      checkoutShippingEl.textContent = `$${shipping.toFixed(2)}`;
+      checkoutTotalEl.textContent = `$${total.toFixed(2)}`;
+    }
+    
+    // Handle checkout form submission
+    document.getElementById('checkoutForm')?.addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Order placed successfully!');
+      cart = [];
+      saveCart();
+      updateCartCount();
+      window.location.href = 'index.html';
+    });
+    
+    // Initialize
+    updateCartCount();
+    
+    // Show checkout page if URL contains #checkout
+    if (window.location.hash === '#checkout') {
+      document.getElementById('pageContent').style.display = 'none';
+      document.getElementById('checkoutPage').style.display = 'block';
+      updateCheckoutPage();
+    }
+    
+    // Show cart modal when clicking cart icon
+    document.querySelector('.navbar-nav .nav-link[href="cart.html"]')?.addEventListener('click', function(e) {
+      e.preventDefault();
+      displayCartItems();
+      new bootstrap.Modal(document.getElementById('cartModal')).show();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chronosfera | Shop</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+  <style>
+    :root {
+      --gold: #d4af37;
+      --dark: #1a1a1a;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #333;
+      background: #fff;
+    }
+    .navbar {
+      background-color: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .navbar-brand img {
+      height: 40px;
+    }
+    .hero-section {
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+        url('https://images.unsplash.com/photo-1523170335258-f5ed11844a49?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+      background-size: cover;
+      background-position: center;
+      height: 400px;
+      display: flex;
+      align-items: center;
+      color: white;
+      margin-bottom: 50px;
+      text-align: center;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    .section-header h2 {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+    }
+    .section-header p {
+      font-size: 1.1rem;
+      color: #666;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .product-card {
+      border: none;
+      margin-bottom: 30px;
+      transition: all 0.3s ease;
+      text-align: center;
+      cursor: pointer;
+      position: relative;
+      height: 100%;
+    }
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+    .product-img {
+      height: 250px;
+      overflow: hidden;
+      margin-bottom: 20px;
+      position: relative;
+    }
+    .product-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .product-card:hover .product-img img {
+      transform: scale(1.05);
+    }
+    .product-info {
+      display: flex;
+      flex-direction: column;
+      height: calc(100% - 270px);
+    }
+    .product-info h3 {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .product-price {
+      font-weight: bold;
+      color: var(--dark);
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+    .product-rating {
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+  .product-description {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 15px;
+  flex-grow: 1;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  display: -moz-box;
+  -moz-line-clamp: 3;
+  -moz-box-orient: vertical;
+  display: box;
+  line-clamp: 3;
+  box-orient: vertical;
+}
+    .btn-add-to-cart {
+      background-color: var(--gold);
+      color: white;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 4px;
+      transition: all 0.3s;
+      width: 100%;
+      margin-top: auto;
+    }
+    .btn-add-to-cart:hover {
+      background-color: #c19d2e;
+      transform: translateY(-2px);
+    }
+    .filter-section {
+      background: #f9f9f9;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 30px;
+    }
+    .filter-group {
+      margin-bottom: 25px;
+    }
+    .filter-group h5 {
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+    .pagination .page-item.active .page-link {
+      background-color: var(--gold);
+      border-color: var(--gold);
+      color: white;
+    }
+    .pagination .page-link {
+      color: var(--dark);
+      cursor: pointer;
+    }
+    footer {
+      background: var(--dark);
+      color: white;
+      padding: 40px 0;
+    }
+    footer a {
+      color: white;
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+    .search-box {
+      position: relative;
+      margin-bottom: 30px;
+    }
+    .search-box input {
+      padding-left: 40px;
+      border-radius: 20px;
+    }
+    .search-box i {
+      position: absolute;
+      left: 15px;
+      top: 12px;
+      color: #666;
+    }
+    .sort-options {
+      margin-bottom: 20px;
+    }
+    .loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255,255,255,0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      display: none;
+    }
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid #f3f3f3;
+      border-top: 5px solid var(--gold);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .product-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: var(--gold);
+      color: white;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+  <!-- Loading Overlay -->
+  <div class="loading-overlay">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <img src="https://via.placeholder.com/150x50?text=CHRONOSFERA" alt="Chronosfera" />
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link active" href="shop.html">Shop</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-shopping-cart"></i> <span class="cart-count">0</span></a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container">
+      <h1 class="display-4 fw-bold mb-4">Premium Watch Collection</h1>
+      <p class="lead mb-5">Timeless designs that defy time</p>
+    </div>
+  </section>
+
+  <!-- Shop Content -->
+  <section class="py-5">
+    <div class="container">
+      <div class="section-header">
+        <h2>Popular Items</h2>
+        <p>Discover our most sought-after timepieces, crafted with precision and style.</p>
+      </div>
+
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" id="searchInput" class="form-control" placeholder="Search watches..." />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="sort-options float-md-end">
+            <select id="sortSelect" class="form-select">
+              <option value="default">Sort by: Featured</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+              <option value="name-asc">Name: A to Z</option>
+              <option value="name-desc">Name: Z to A</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Filters -->
+        <div class="col-lg-3">
+          <div class="filter-section">
+            <h4 class="mb-4">Filters</h4>
+
+            <div class="filter-group">
+              <h5>Categories</h5>
+              <div class="form-check">
+                <input class="form-check-input category-filter" type="checkbox" id="category-classic" value="classic" checked />
+                <label class="form-check-label" for="category-classic">Classic</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input category-filter" type="checkbox" id="category-sport" value="sport" checked />
+                <label class="form-check-label" for="category-sport">Sport</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input category-filter" type="checkbox" id="category-luxury" value="luxury" checked />
+                <label class="form-check-label" for="category-luxury">Luxury</label>
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <h5>Price Range</h5>
+              <input type="range" class="form-range" min="0" max="100000" step="100" id="priceRange" value="100000" />
+              <div class="d-flex justify-content-between mt-2">
+                <span>$0</span>
+                <span id="maxPrice">$100,000</span>
+              </div>
+            </div>
+
+            <button class="btn btn-dark w-100 mt-3" id="applyFilters">Apply Filters</button>
+          </div>
+        </div>
+
+        <!-- Products -->
+        <div class="col-lg-9">
+          <div class="row" id="productContainer">
+            <!-- Products will load here -->
+          </div>
+
+          <!-- Pagination -->
+          <nav aria-label="Page navigation" class="mt-5">
+            <ul class="pagination justify-content-center" id="pagination">
+              <!-- Pagination buttons inserted here -->
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 mb-4 mb-lg-0">
+          <img src="https://via.placeholder.com/150x50?text=CHRONOSFERA" alt="Chronosfera" class="mb-3" />
+          <p>Chronosfera is a luxury brand that creates timepieces that defy time. Each watch is a fusion of craftsmanship and passion.</p>
+        </div>
+        <div class="col-lg-4 mb-4 mb-lg-0">
+          <h5>Quick Links</h5>
+          <ul class="list-unstyled">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4">
+          <h5>Contact</h5>
+          <ul class="list-unstyled">
+            <li><i class="fas fa-map-marker-alt me-2"></i>123 Watch Street, Geneva</li>
+            <li><i class="fas fa-phone me-2"></i>+41 22 123 45 67</li>
+            <li><i class="fas fa-envelope me-2"></i>info@chronosfera.com</li>
+          </ul>
+        </div>
+      </div>
+      <hr class="my-4" style="border-color: #555;">
+      <div class="text-center">
+        <p class="mb-0">&copy; 2023 Chronosfera. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const products = [
+      { 
+        id: 1, 
+        name: "Rolex Submariner", 
+        category: "luxury", 
+        price: 8500, 
+        image: "https://i0.wp.com/wannabuyawatch.com/wp-content/uploads/2021/03/52078.jpg?fit=960%2C1280&ssl=1",
+        rating: 4.8,
+        reviews: 124,
+        description: "The Rolex Submariner is the reference among diver's watches. Launched in 1953, it was the first wristwatch waterproof to a depth of 100 meters.",
+        details: ["Waterproof to 300m", "Ceramic bezel", "Automatic movement", "Stainless steel case"]
+      },
+      { 
+        id: 2, 
+        name: "Omega Seamaster", 
+        category: "sport", 
+        price: 4500, 
+        image: "//www.robertgatwardjewellers.co.uk/cdn/shop/products/21020445103001.jpg?crop=center&height=2048&v=1645216338&width=2048",
+        rating: 4.7,
+        reviews: 98,
+        description: "The Omega Seamaster is a true diving watch with a rich history of underwater exploration and adventure.",
+        details: ["Waterproof to 300m", "Co-Axial escapement", "Ceramic bezel", "Date function"]
+      },
+      { 
+        id: 3, 
+        name: "Tag Heuer Carrera", 
+        category: "sport", 
+        price: 3800, 
+        image: "https://www.tagheuer.com/on/demandware.static/-/Sites-tagheuer-master-default/dw5f2c0bba/images/CAR201Z.FC6404/CAR201Z.FC6404_1.png",
+        rating: 4.5,
+        reviews: 76,
+        description: "The TAG Heuer Carrera is a legendary chronograph with a sporty yet elegant design.",
+        details: ["Chronograph function", "Sapphire crystal", "Water resistant to 100m", "42mm case"]
+      },
+      { 
+        id: 4, 
+        name: "Cartier Tank", 
+        category: "luxury", 
+        price: 7000, 
+        image: "https://www.cartier.com/variants/images/33772355254002348/F--W1000--product.jpg",
+        rating: 4.6,
+        reviews: 89,
+        description: "The Cartier Tank is an icon of style with its rectangular case and Roman numerals.",
+        details: ["Quartz movement", "18k gold case", "Sapphire crystal", "Leather strap"]
+      },
+      { 
+        id: 5, 
+        name: "Seiko Prospex", 
+        category: "sport", 
+        price: 1200, 
+        image: "https://www.seikowatches.com/jp-ja/-/media/Images/Japan/Seiko/Home/products/prospex/Marinemaster/SBEN007.png",
+        rating: 4.4,
+        reviews: 112,
+        description: "The Seiko Prospex is a professional diver's watch with exceptional water resistance.",
+        details: ["Waterproof to 200m", "Automatic movement", "Luminescent markers", "Stainless steel"]
+      },
+      { 
+        id: 6, 
+        name: "Patek Philippe Nautilus", 
+        category: "luxury", 
+        price: 55000, 
+        image: "https://watchesbysjx.com/wp-content/uploads/2021/04/Patek-Philippe-Nautilus-Chronograph-5990-1R-rose-gold-blue-9.jpg",
+        rating: 4.9,
+        reviews: 45,
+        description: "The Patek Philippe Nautilus is one of the most coveted luxury sports watches.",
+        details: ["Self-winding movement", "Stainless steel", "Water resistant to 120m", "40mm case"]
+      },
+      { 
+        id: 7, 
+        name: "Breitling Navitimer", 
+        category: "luxury", 
+        price: 8000, 
+        image: "https://www.breitling.com/media/catalog/product/cache/02cc9bfdb09b9435f3b5cde44c9c45e2/a/v/avenger-automatic-43-1.jpg",
+        rating: 4.6,
+        reviews: 78,
+        description: "The Breitling Navitimer is the ultimate pilot's watch with its circular slide rule.",
+        details: ["Chronograph", "Slide rule bezel", "41mm case", "Sapphire crystal"]
+      },
+      { 
+        id: 8, 
+        name: "Tissot Le Locle", 
+        category: "classic", 
+        price: 700, 
+        image: "https://www.tissotwatches.com/media/catalog/product/cache/fb53a4417fa7d7d29f89683dd7e03e2a/l/e/leloclepowermatic80_1.png",
+        rating: 4.3,
+        reviews: 95,
+        description: "The Tissot Le Locle combines Swiss precision with classic elegance.",
+        details: ["Automatic movement", "39mm case", "Sapphire crystal", "Power reserve 80h"]
+      },
+      { 
+        id: 9, 
+        name: "Longines HydroConquest", 
+        category: "sport", 
+        price: 1500, 
+        image: "https://www.longines.com/media/catalog/product/cache/1/image/800x800/9df78eab33525d08d6e5fb8d27136e95/h/y/hydroconquest-automatic-41mm-l37834566-l3-783-4-56-6.png",
+        rating: 4.5,
+        reviews: 87,
+        description: "The Longines HydroConquest is a high-performance diving watch.",
+        details: ["Waterproof to 300m", "Automatic movement", "Ceramic bezel", "41mm case"]
+      },
+      { 
+        id: 10, 
+        name: "IWC Pilot's Watch", 
+        category: "classic", 
+        price: 6500, 
+        image: "https://www.iwc.com/content/dam/iwc/iwc-master-products/pilotwatch/iwc-pilotwatch-mark-xviii-iw327010-1.jpg",
+        rating: 4.7,
+        reviews: 64,
+        description: "The IWC Pilot's Watch features a clean, legible design inspired by aviation instruments.",
+        details: ["Automatic movement", "40mm case", "Soft-iron inner case", "Sapphire crystal"]
+      },
+      { 
+        id: 11, 
+        name: "Hublot Big Bang", 
+        category: "luxury", 
+        price: 12000, 
+        image: "https://www.hublot.com/media/catalog/product/cache/8d78582a51182b1e4db0f7e230cfe3e2/b/i/big-bang-unico-42-mm-441-nx-1170-rx.png",
+        rating: 4.5,
+        reviews: 59,
+        description: "The Hublot Big Bang features an avant-garde design with innovative materials.",
+        details: ["Chronograph", "42mm case", "Skeleton dial", "Titanium case"]
+      },
+      { 
+        id: 12, 
+        name: "Casio G-Shock", 
+        category: "sport", 
+        price: 200, 
+        image: "https://www.casio.com/content/dam/casio/product-info/watches/gshock/g-shock-gw-m5610-1_560x560.png",
+        rating: 4.8,
+        reviews: 342,
+        description: "The Casio G-Shock is the ultimate tough watch with shock resistance and multiple functions.",
+        details: ["Shock resistant", "200m water resistant", "Solar powered", "Atomic timekeeping"]
+      },
+      { 
+        id: 13, 
+        name: "Audemars Piguet Royal Oak", 
+        category: "luxury", 
+        price: 35000, 
+        image: "https://www.audemarspiguet.com/content/dam/ap-com/product-page-images/royal-oak/15400ST-OO-1220ST-01/15400ST-OO-1220ST-01_1.png",
+        rating: 4.9,
+        reviews: 38,
+        description: "The Audemars Piguet Royal Oak revolutionized luxury sports watches with its octagonal bezel.",
+        details: ["Automatic movement", "41mm case", "Stainless steel", "Integrated bracelet"]
+      },
+      { 
+        id: 14, 
+        name: "Citizen Eco-Drive", 
+        category: "classic", 
+        price: 300, 
+        image: "https://www.citizenwatch.com/media/catalog/product/cache/0c87c48b42d46e2f468da5d294e1b6c1/b/u/bu2040-55a_01.png",
+        rating: 4.4,
+        reviews: 156,
+        description: "The Citizen Eco-Drive is powered by light, eliminating the need for battery changes.",
+        details: ["Light-powered", "Perpetual calendar", "42mm case", "Stainless steel"]
+      },
+      { 
+        id: 15, 
+        name: "Bell & Ross BR 03", 
+        category: "sport", 
+        price: 4000, 
+        image: "https://www.bellross.com/media/catalog/product/cache/1/image/600x600/9df78eab33525d08d6e5fb8d27136e95/br03-92-black-matte-br0392-blc-ceramic-5.png",
+        rating: 4.5,
+        reviews: 72,
+        description: "The Bell & Ross BR 03 features an instrument-inspired square case design.",
+        details: ["Automatic movement", "42mm case", "Matte ceramic case", "Superluminova markers"]
+      },
+      { 
+        id: 16, 
+        name: "Jaeger-LeCoultre Reverso", 
+        category: "classic", 
+        price: 9000, 
+        image: "https://www.jaeger-lecoultre.com/content/dam/rcq/product-page/2338420_1080x1080.png",
+        rating: 4.7,
+        reviews: 53,
+        description: "The Jaeger-LeCoultre Reverso features a unique reversible case originally designed for polo players.",
+        details: ["Manual winding", "Art Deco design", "Reversible case", "Leather strap"]
+      },
+      { 
+        id: 17, 
+        name: "Panerai Luminor", 
+        category: "luxury", 
+        price: 8500, 
+        image: "https://www.panerai.com/content/dam/panerai/product-page/luminor-1950-3-days/pam00359/pam00359_1.png",
+        rating: 4.6,
+        reviews: 67,
+        description: "The Panerai Luminor is known for its distinctive cushion-shaped case and crown protection device.",
+        details: ["Automatic movement", "44mm case", "Power reserve 3 days", "Water resistant to 300m"]
+      },
+      { 
+        id: 18, 
+        name: "Rolex Daytona", 
+        category: "luxury", 
+        price: 12000, 
+        image: "https://cdn.watchshopping.com/media/catalog/product/cache/ecd1d4ac8a78d4a8ec09a17c4c712f66/r/o/rolex-daytona-116500ln-1.jpg",
+        rating: 4.9,
+        reviews: 42,
+        description: "The Rolex Daytona is the ultimate chronograph watch for motorsports enthusiasts.",
+        details: ["Chronograph", "40mm case", "Ceramic bezel", "Self-winding movement"]
+      },
+      { 
+        id: 19, 
+        name: "Orient Bambino", 
+        category: "classic", 
+        price: 250, 
+        image: "https://www.orientwatchusa.com/media/catalog/product/cache/77fe5f51b702e2ef14b3d208f3bf7969/b/a/bambino-2nd-gen-fac08003a0_1_1.png",
+        rating: 4.3,
+        reviews: 128,
+        description: "The Orient Bambino offers classic dress watch styling at an affordable price.",
+        details: ["Automatic movement", "40.5mm case", "Domed mineral crystal", "Leather strap"]
+      },
+      { 
+        id: 20, 
+        name: "Seagull 1963", 
+        category: "classic", 
+        price: 400, 
+        image: "https://www.seagullwatchstore.com/media/catalog/product/cache/77fe5f51b702e2ef14b3d208f3bf7969/1/9/1963_panda_1_1.png",
+        rating: 4.4,
+        reviews: 96,
+        description: "The Seagull 1963 is a reissue of China's first chronograph watch with a distinctive panda dial.",
+        details: ["Manual winding chronograph", "38mm case", "Acrylic crystal", "NATO strap"]
+      },
+      { 
+        id: 21, 
+        name: "Richard Mille RM 011", 
+        category: "luxury", 
+        price: 150000, 
+        image: "https://www.richardmille.com/sites/default/files/styles/product_detail/public/rm-011_flyback_chronograph_titanium_white_0.png",
+        rating: 4.8,
+        reviews: 12,
+        description: "The Richard Mille RM 011 features an ultra-lightweight case and advanced flyback chronograph.",
+        details: ["Flyback chronograph", "Titanium case", "Annual calendar", "Power reserve 55h"]
+      },
+      { 
+        id: 22, 
+        name: "Grand Seiko SBGA211", 
+        category: "luxury", 
+        price: 6500, 
+        image: "https://www.grand-seiko.com/content/dam/grandseiko/en/product/SBGA211G/SBGA211G_2.png",
+        rating: 4.8,
+        reviews: 58,
+        description: "The Grand Seiko SBGA211 features the brand's signature Spring Drive movement with unparalleled accuracy.",
+        details: ["Spring Drive movement", "41mm case", "72h power reserve", "Zaratsu polished case"]
+      },
+      { 
+        id: 23, 
+        name: "Invicta Pro Diver", 
+        category: "sport", 
+        price: 150, 
+        image: "https://www.invictawatch.com/media/catalog/product/cache/1/image/600x600/9df78eab33525d08d6e5fb8d27136e95/0070_1.png",
+        rating: 4.2,
+        reviews: 187,
+        description: "The Invicta Pro Diver offers professional dive watch features at an entry-level price.",
+        details: ["Water resistant to 200m", "Automatic movement", "Unidirectional bezel", "Stainless steel"]
+      },
+      { 
+        id: 24, 
+        name: "Montblanc Timewalker", 
+        category: "classic", 
+        price: 4200, 
+        image: "https://www.montblanc.com/media/catalog/product/cache/8d78582a51182b1e4db0f7e230cfe3e2/timewalker-chronograph-automatic-43-mm-118495_1_1.png",
+        rating: 4.5,
+        reviews: 49,
+        description: "The Montblanc Timewalker combines motorsport-inspired design with Swiss watchmaking.",
+        details: ["Automatic chronograph", "43mm case", "Tachymeter scale", "Sapphire crystal"]
+      },
+      { 
+        id: 25, 
+        name: "Fossil Grant", 
+        category: "classic", 
+        price: 160, 
+        image: "https://www.fossil.com/on/demandware.static/-/Sites-fossil-master-catalog/default/dw50d42a09/zoom/FS5151_main.png",
+        rating: 4.1,
+        reviews: 213,
+        description: "The Fossil Grant offers classic American watch design with reliable quartz movement.",
+        details: ["Quartz movement", "44mm case", "Mineral crystal", "Leather strap"]
+      },
+      { 
+        id: 26, 
+        name: "Hublot Classic Fusion", 
+        category: "luxury", 
+        price: 9000, 
+        image: "https://thumuadongho.com.vn/wp-content/uploads/2023/01/Hublot-Classic-Fusion-Aerofusion-King-Gold-Diamonds.png",
+        rating: 4.6,
+        reviews: 41,
+        description: "The Hublot Classic Fusion combines traditional watchmaking with contemporary design.",
+        details: ["Automatic movement", "42mm case", "Titanium case", "Sapphire crystal"]
+      },
+      { 
+        id: 27, 
+        name: "Swatch Sistem51", 
+        category: "sport", 
+        price: 200, 
+        image: "https://timeandtidewatches.com/wp-content/uploads/2014/09/KD12266-845x562.jpg",
+        rating: 4.3,
+        reviews: 145,
+        description: "The Swatch Sistem51 features a fully automated mechanical movement with 90-hour power reserve.",
+        details: ["Automatic movement", "42mm case", "90h power reserve", "Plastic case"]
+      },
+      { 
+        id: 28, 
+        name: "Citizen Promaster", 
+        category: "sport", 
+        price: 600, 
+        image: "//cdn.idealo.com/folder/Product/203550/5/203550594/s3_produktbild_max/citizen-promaster-automatic-ny0120-01ee.jpg",
+        rating: 4.5,
+        reviews: 87,
+        description: "The Citizen Promaster is a professional diver's watch with Eco-Drive technology.",
+        details: ["Eco-Drive movement", "Water resistant to 200m", "Unidirectional bezel", "Stainless steel"]
+      },
+      { 
+        id: 29, 
+        name: "Maurice Lacroix Aikon", 
+        category: "classic", 
+        price: 1900, 
+        image: "https://monochrome-watches.com/wp-content/uploads/2020/08/Maurice-Lacroix-Aikon-Automatic-39mm-hands-on-7.jpg",
+        rating: 4.4,
+        reviews: 63,
+        description: "The Maurice Lacroix Aikon features an integrated bracelet design inspired by 90s classics.",
+        details: ["Automatic movement", "39mm case", "Integrated bracelet", "Sapphire crystal"]
+      },
+      { 
+        id: 30, 
+        name: "Citizen Nighthawk", 
+        category: "sport", 
+        price: 350, 
+        image: "https://www.firstclasswatches.co.uk/blog/wp-content/uploads/2017/08/CA4377-53H.jpg",
+        rating: 4.6,
+        reviews: 132,
+        description: "The Citizen Nighthawk is an aviation-inspired watch with Eco-Drive technology and slide rule bezel.",
+        details: ["Eco-Drive movement", "42mm case", "Slide rule bezel", "Stainless steel"]
+      }
+    ];
+
+    const productsPerPage = 8; 
+    let currentPage = 1;
+    let cart = [];
+
+    const productContainer = document.getElementById('productContainer');
+    const paginationContainer = document.getElementById('pagination');
+    const categoryFilters = document.querySelectorAll('.category-filter');
+    const priceRange = document.getElementById('priceRange');
+    const maxPriceDisplay = document.getElementById('maxPrice');
+    const applyFiltersBtn = document.getElementById('applyFilters');
+    const searchInput = document.getElementById('searchInput');
+    const sortSelect = document.getElementById('sortSelect');
+    const loadingOverlay = document.querySelector('.loading-overlay');
+    const cartCount = document.querySelector('.cart-count');
+
+    function showLoading() {
+      loadingOverlay.style.display = 'flex';
+    }
+
+    function hideLoading() {
+      setTimeout(() => {
+        loadingOverlay.style.display = 'none';
+      }, 300);
+    }
+
+    function getFilters() {
+      const selectedCategories = Array.from(categoryFilters)
+        .filter(chk => chk.checked)
+        .map(chk => chk.value);
+      const maxPrice = Number(priceRange.value);
+      const searchTerm = searchInput.value.toLowerCase();
+      const sortOption = sortSelect.value;
+      
+      return { selectedCategories, maxPrice, searchTerm, sortOption };
+    }
+
+    function getFilteredProducts() {
+      const { selectedCategories, maxPrice, searchTerm, sortOption } = getFilters();
+      
+      let filtered = products.filter(p => 
+        selectedCategories.includes(p.category) && 
+        p.price <= maxPrice &&
+        (p.name.toLowerCase().includes(searchTerm) || 
+         p.description.toLowerCase().includes(searchTerm))
+      );
+
+      // Sorting
+      switch(sortOption) {
+        case 'price-asc':
+          filtered.sort((a, b) => a.price - b.price);
+          break;
+        case 'price-desc':
+          filtered.sort((a, b) => b.price - a.price);
+          break;
+        case 'name-asc':
+          filtered.sort((a, b) => a.name.localeCompare(b.name));
+          break;
+        case 'name-desc':
+          filtered.sort((a, b) => b.name.localeCompare(a.name));
+          break;
+        default:
+          filtered.sort((a, b) => a.id - b.id);
+      }
+
+      return filtered;
+    }
+
+    function renderStarRating(rating) {
+            const fullStars = Math.floor(rating);
+      const hasHalfStar = rating % 1 >= 0.5;
+      let stars = '';
+      
+      for (let i = 0; i < fullStars; i++) {
+        stars += '<i class="fas fa-star"></i>';
+      }
+      
+      if (hasHalfStar) {
+        stars += '<i class="fas fa-star-half-alt"></i>';
+      }
+      
+      const emptyStars = 5 - Math.ceil(rating);
+      for (let i = 0; i < emptyStars; i++) {
+        stars += '<i class="far fa-star"></i>';
+      }
+      
+      return stars;
+    }
+
+    function renderProducts(page = 1) {
+      showLoading();
+      
+      const filteredProducts = getFilteredProducts();
+      const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+      currentPage = Math.min(page, totalPages);
+      
+      const startIndex = (currentPage - 1) * productsPerPage;
+      const endIndex = startIndex + productsPerPage;
+      const paginatedProducts = filteredProducts.slice(startIndex, endIndex);
+      
+      productContainer.innerHTML = '';
+      
+      if (paginatedProducts.length === 0) {
+        productContainer.innerHTML = `
+          <div class="col-12 text-center py-5">
+            <h4>No products found matching your criteria</h4>
+            <p>Try adjusting your filters or search term</p>
+          </div>
+        `;
+      } else {
+        paginatedProducts.forEach(product => {
+          const productCard = document.createElement('div');
+          productCard.className = 'col-md-6 col-lg-4 col-xl-3';
+          productCard.innerHTML = `
+            <div class="card product-card">
+              <div class="product-img">
+                <img src="${product.image}" alt="${product.name}" />
+                ${product.price > 10000 ? '<span class="product-badge">Premium</span>' : ''}
+              </div>
+              <div class="product-info">
+                <h3>${product.name}</h3>
+                <div class="product-price">$${product.price.toLocaleString()}</div>
+                <div class="product-rating">
+                  ${renderStarRating(product.rating)}
+                  <small>(${product.reviews})</small>
+                </div>
+                <p class="product-description">${product.description}</p>
+                <button class="btn btn-add-to-cart" data-id="${product.id}">
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          `;
+          productContainer.appendChild(productCard);
+        });
+      }
+      
+      renderPagination(filteredProducts.length);
+      hideLoading();
+    }
+
+    function renderPagination(totalProducts) {
+      const totalPages = Math.ceil(totalProducts / productsPerPage);
+      paginationContainer.innerHTML = '';
+      
+      if (totalPages <= 1) return;
+      
+      // Previous button
+      const prevLi = document.createElement('li');
+      prevLi.className = `page-item ${currentPage === 1 ? 'disabled' : ''}`;
+      prevLi.innerHTML = `
+        <a class="page-link" href="#" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      `;
+      prevLi.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (currentPage > 1) renderProducts(currentPage - 1);
+      });
+      paginationContainer.appendChild(prevLi);
+      
+      // Page numbers
+      for (let i = 1; i <= totalPages; i++) {
+        const pageLi = document.createElement('li');
+        pageLi.className = `page-item ${i === currentPage ? 'active' : ''}`;
+        pageLi.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+        pageLi.addEventListener('click', (e) => {
+          e.preventDefault();
+          renderProducts(i);
+        });
+        paginationContainer.appendChild(pageLi);
+      }
+      
+      // Next button
+      const nextLi = document.createElement('li');
+      nextLi.className = `page-item ${currentPage === totalPages ? 'disabled' : ''}`;
+      nextLi.innerHTML = `
+        <a class="page-link" href="#" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      `;
+      nextLi.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (currentPage < totalPages) renderProducts(currentPage + 1);
+      });
+      paginationContainer.appendChild(nextLi);
+    }
+
+    function addToCart(productId) {
+      const product = products.find(p => p.id === productId);
+      if (!product) return;
+      
+      const existingItem = cart.find(item => item.id === productId);
+      if (existingItem) {
+        existingItem.quantity++;
+      } else {
+        cart.push({ ...product, quantity: 1 });
+      }
+      
+      updateCartCount();
+      showToast(`${product.name} added to cart`);
+    }
+
+    function updateCartCount() {
+      const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+      cartCount.textContent = totalItems;
+    }
+
+    function showToast(message) {
+      const toast = document.createElement('div');
+      toast.className = 'position-fixed bottom-0 end-0 p-3';
+      toast.style.zIndex = '11';
+      toast.innerHTML = `
+        <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="toast-header">
+            <strong class="me-auto">Chronosfera</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+          <div class="toast-body">
+            ${message}
+          </div>
+        </div>
+      `;
+      
+      document.body.appendChild(toast);
+      
+      setTimeout(() => {
+        toast.remove();
+      }, 3000);
+    }
+
+    // Event Listeners
+    document.addEventListener('DOMContentLoaded', () => {
+      renderProducts();
+      
+      // Update max price display
+      priceRange.addEventListener('input', () => {
+        maxPriceDisplay.textContent = `$${Number(priceRange.value).toLocaleString()}`;
+      });
+      
+      // Apply filters button
+      applyFiltersBtn.addEventListener('click', () => {
+        renderProducts(1);
+      });
+      
+      // Search input
+      searchInput.addEventListener('keyup', (e) => {
+        if (e.key === 'Enter') {
+          renderProducts(1);
+        }
+      });
+      
+      // Sort select
+      sortSelect.addEventListener('change', () => {
+        renderProducts(1);
+      });
+      
+      // Add to cart buttons (delegated)
+      productContainer.addEventListener('click', (e) => {
+        if (e.target.classList.contains('btn-add-to-cart')) {
+          const productId = Number(e.target.getAttribute('data-id'));
+          addToCart(productId);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
