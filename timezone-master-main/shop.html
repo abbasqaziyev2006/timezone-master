@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Chronosfera | Shop</title>
+  <title>Shop</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
   <style>
@@ -11,20 +12,24 @@
       --gold: #d4af37;
       --dark: #1a1a1a;
     }
+
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       color: #333;
       background: #fff;
     }
+
     .navbar {
       background-color: white;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     }
+
     .navbar-brand img {
       height: 40px;
     }
+
     .hero-section {
-      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
         url('https://images.unsplash.com/photo-1523170335258-f5ed11844a49?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
       background-size: cover;
       background-position: center;
@@ -35,53 +40,91 @@
       margin-bottom: 50px;
       text-align: center;
     }
+
     .section-header {
       text-align: center;
       margin-bottom: 50px;
     }
+
     .section-header h2 {
       font-size: 2.5rem;
       margin-bottom: 15px;
     }
+
     .section-header p {
       font-size: 1.1rem;
       color: #666;
       max-width: 700px;
       margin: 0 auto;
     }
+
     .product-card {
-      border: none;
-      margin-bottom: 30px;
-      transition: all 0.3s ease;
-      text-align: center;
-      cursor: pointer;
-      position: relative;
+      display: flex;
+      flex-direction: column;
       height: 100%;
+      transition: all 0.3s ease;
     }
+
     .product-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     }
+
+    .product-info {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
     .product-img {
       height: 250px;
+      width: 100%;
       overflow: hidden;
       margin-bottom: 20px;
       position: relative;
+      background-color: #f8f9fa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
+
     .product-img img {
-      width: 100%;
+      width: auto;
       height: 100%;
-      object-fit: cover;
+      max-width: 100%;
+      object-fit: contain;
       transition: transform 0.5s ease;
     }
-    .product-card:hover .product-img img {
-      transform: scale(1.05);
-    }
-    .product-info {
+
+    .btn-add-to-cart {
+      background-color: var(--gold);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      transition: all 0.3s;
+      width: 100%;
+      margin-top: auto;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      font-size: 0.85rem;
       display: flex;
-      flex-direction: column;
-      height: calc(100% - 270px);
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
     }
+
+    .btn-add-to-cart:hover {
+      background-color: #c19d2e;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-add-to-cart:active {
+      transform: translateY(0);
+    }
+
     .product-info h3 {
       font-size: 1.3rem;
       margin-bottom: 10px;
@@ -89,111 +132,108 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
+
     .product-price {
       font-weight: bold;
       color: var(--dark);
       font-size: 1.2rem;
       margin-bottom: 10px;
     }
+
     .product-rating {
       color: var(--gold);
       margin-bottom: 10px;
     }
-  .product-description {
-  font-size: 0.9rem;
-  color: #666;
-  margin-bottom: 15px;
-  flex-grow: 1;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 3; 
-  -webkit-box-orient: vertical;
-  display: -moz-box;
-  -moz-line-clamp: 3;
-  -moz-box-orient: vertical;
-  display: box;
-  line-clamp: 3;
-  box-orient: vertical;
-}
-    .btn-add-to-cart {
-      background-color: var(--gold);
-      color: white;
-      border: none;
-      padding: 8px 20px;
-      border-radius: 4px;
-      transition: all 0.3s;
-      width: 100%;
-      margin-top: auto;
+
+    .product-description {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 15px;
+      flex-grow: 1;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
     }
-    .btn-add-to-cart:hover {
-      background-color: #c19d2e;
-      transform: translateY(-2px);
-    }
+
     .filter-section {
       background: #f9f9f9;
       padding: 20px;
       border-radius: 8px;
       margin-bottom: 30px;
     }
+
     .filter-group {
       margin-bottom: 25px;
     }
+
     .filter-group h5 {
       margin-bottom: 15px;
       padding-bottom: 10px;
       border-bottom: 1px solid #ddd;
     }
+
     .pagination .page-item.active .page-link {
       background-color: var(--gold);
       border-color: var(--gold);
       color: white;
     }
+
     .pagination .page-link {
       color: var(--dark);
       cursor: pointer;
     }
+
     footer {
       background: var(--dark);
       color: white;
       padding: 40px 0;
     }
+
     footer a {
       color: white;
       text-decoration: none;
     }
+
     footer a:hover {
       text-decoration: underline;
     }
+
     .search-box {
       position: relative;
       margin-bottom: 30px;
     }
+
     .search-box input {
       padding-left: 40px;
       border-radius: 20px;
     }
+
     .search-box i {
       position: absolute;
       left: 15px;
       top: 12px;
       color: #666;
     }
+
     .sort-options {
       margin-bottom: 20px;
     }
+
     .loading-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(255,255,255,0.8);
+      background: rgba(255, 255, 255, 0.8);
       display: flex;
       justify-content: center;
       align-items: center;
       z-index: 1000;
       display: none;
     }
+
     .spinner {
       width: 50px;
       height: 50px;
@@ -202,10 +242,17 @@
       border-radius: 50%;
       animation: spin 1s linear infinite;
     }
+
     @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
     }
+
     .product-badge {
       position: absolute;
       top: 10px;
@@ -218,8 +265,73 @@
       font-weight: bold;
       z-index: 1;
     }
+
+    /* Cart Item Styles */
+    .cart-item {
+      display: flex;
+      align-items: center;
+      padding: 15px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .cart-item-img {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      margin-right: 15px;
+    }
+
+    .cart-item-details {
+      flex-grow: 1;
+    }
+
+    .cart-item-title {
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .cart-item-price {
+      color: var(--gold);
+      font-weight: bold;
+    }
+
+    .cart-item-quantity {
+      display: flex;
+      align-items: center;
+    }
+
+    .cart-item-quantity button {
+      width: 30px;
+      height: 30px;
+      border: 1px solid #ddd;
+      background: #f9f9f9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cart-item-quantity input {
+      width: 50px;
+      text-align: center;
+      border: 1px solid #ddd;
+      margin: 0 5px;
+    }
+
+    .remove-item {
+      color: #dc3545;
+      cursor: pointer;
+      margin-left: 15px;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1100;
+    }
   </style>
 </head>
+
 <body>
   <!-- Loading Overlay -->
   <div class="loading-overlay">
@@ -229,9 +341,6 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light sticky-top">
     <div class="container">
-      <a class="navbar-brand" href="index.html">
-        <img src="https://via.placeholder.com/150x50?text=CHRONOSFERA" alt="Chronosfera" />
-      </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -240,7 +349,12 @@
           <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
           <li class="nav-item"><a class="nav-link active" href="shop.html">Shop</a></li>
           <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-shopping-cart"></i> <span class="cart-count">0</span></a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" id="cartLink">
+              <i class="fas fa-shopping-cart"></i> 
+              <span class="cart-count">0</span>
+            </a>
+          </li>
         </ul>
       </div>
     </div>
@@ -291,15 +405,18 @@
             <div class="filter-group">
               <h5>Categories</h5>
               <div class="form-check">
-                <input class="form-check-input category-filter" type="checkbox" id="category-classic" value="classic" checked />
+                <input class="form-check-input category-filter" type="checkbox" id="category-classic" value="classic"
+                  checked />
                 <label class="form-check-label" for="category-classic">Classic</label>
               </div>
               <div class="form-check">
-                <input class="form-check-input category-filter" type="checkbox" id="category-sport" value="sport" checked />
+                <input class="form-check-input category-filter" type="checkbox" id="category-sport" value="sport"
+                  checked />
                 <label class="form-check-label" for="category-sport">Sport</label>
               </div>
               <div class="form-check">
-                <input class="form-check-input category-filter" type="checkbox" id="category-luxury" value="luxury" checked />
+                <input class="form-check-input category-filter" type="checkbox" id="category-luxury" value="luxury"
+                  checked />
                 <label class="form-check-label" for="category-luxury">Luxury</label>
               </div>
             </div>
@@ -340,7 +457,8 @@
       <div class="row">
         <div class="col-lg-4 mb-4 mb-lg-0">
           <img src="https://via.placeholder.com/150x50?text=CHRONOSFERA" alt="Chronosfera" class="mb-3" />
-          <p>Chronosfera is a luxury brand that creates timepieces that defy time. Each watch is a fusion of craftsmanship and passion.</p>
+          <p>Chronosfera is a luxury brand that creates timepieces that defy time. Each watch is a fusion of
+            craftsmanship and passion.</p>
         </div>
         <div class="col-lg-4 mb-4 mb-lg-0">
           <h5>Quick Links</h5>
@@ -367,333 +485,361 @@
     </div>
   </footer>
 
+  <!-- Shopping Cart Modal -->
+  <div class="modal fade" id="cartModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Your Shopping Cart</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div id="cartItemsContainer">
+            <!-- Cart items will be displayed here -->
+            <div class="text-center py-4" id="emptyCartMessage">
+              <i class="fas fa-shopping-cart fa-3x mb-3 text-muted"></i>
+              <h5>Your cart is empty</h5>
+              <p class="text-muted">Start shopping to add items to your cart</p>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="w-100 d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Total: <span id="cartTotal">$0.00</span></h5>
+            <button class="btn btn-dark" id="checkoutBtn">Proceed to Checkout</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     const products = [
-      { 
-        id: 1, 
-        name: "Rolex Submariner", 
-        category: "luxury", 
-        price: 8500, 
+      {
+        id: 1,
+        name: "Rolex Submariner",
+        category: "luxury",
+        price: 8500,
         image: "https://i0.wp.com/wannabuyawatch.com/wp-content/uploads/2021/03/52078.jpg?fit=960%2C1280&ssl=1",
         rating: 4.8,
         reviews: 124,
         description: "The Rolex Submariner is the reference among diver's watches. Launched in 1953, it was the first wristwatch waterproof to a depth of 100 meters.",
         details: ["Waterproof to 300m", "Ceramic bezel", "Automatic movement", "Stainless steel case"]
       },
-      { 
-        id: 2, 
-        name: "Omega Seamaster", 
-        category: "sport", 
-        price: 4500, 
+      {
+        id: 2,
+        name: "Omega Seamaster",
+        category: "sport",
+        price: 4500,
         image: "//www.robertgatwardjewellers.co.uk/cdn/shop/products/21020445103001.jpg?crop=center&height=2048&v=1645216338&width=2048",
         rating: 4.7,
         reviews: 98,
         description: "The Omega Seamaster is a true diving watch with a rich history of underwater exploration and adventure.",
         details: ["Waterproof to 300m", "Co-Axial escapement", "Ceramic bezel", "Date function"]
       },
-      { 
-        id: 3, 
-        name: "Tag Heuer Carrera", 
-        category: "sport", 
-        price: 3800, 
-        image: "https://www.tagheuer.com/on/demandware.static/-/Sites-tagheuer-master-default/dw5f2c0bba/images/CAR201Z.FC6404/CAR201Z.FC6404_1.png",
+      {
+        id: 3,
+        name: "Tag Heuer Carrera",
+        category: "sport",
+        price: 3800,
+        image: "https://www.tagheuer.com/on/demandware.static/-/Sites-tagheuer-master/default/dw3937cfd2/TAG_Heuer_Carrera/CV2A1V.BA0738/CV2A1V.BA0738_1000.png",
         rating: 4.5,
         reviews: 76,
         description: "The TAG Heuer Carrera is a legendary chronograph with a sporty yet elegant design.",
         details: ["Chronograph function", "Sapphire crystal", "Water resistant to 100m", "42mm case"]
       },
-      { 
-        id: 4, 
-        name: "Cartier Tank", 
-        category: "luxury", 
-        price: 7000, 
-        image: "https://www.cartier.com/variants/images/33772355254002348/F--W1000--product.jpg",
+      {
+        id: 4,
+        name: "Cartier Tank",
+        category: "luxury",
+        price: 7000,
+        image: "https://www.klockia.se/static/files/331/2400634-f.jpg",
         rating: 4.6,
         reviews: 89,
         description: "The Cartier Tank is an icon of style with its rectangular case and Roman numerals.",
         details: ["Quartz movement", "18k gold case", "Sapphire crystal", "Leather strap"]
       },
-      { 
-        id: 5, 
-        name: "Seiko Prospex", 
-        category: "sport", 
-        price: 1200, 
+      {
+        id: 5,
+        name: "Seiko Prospex",
+        category: "sport",
+        price: 1200,
         image: "https://www.seikowatches.com/jp-ja/-/media/Images/Japan/Seiko/Home/products/prospex/Marinemaster/SBEN007.png",
         rating: 4.4,
         reviews: 112,
         description: "The Seiko Prospex is a professional diver's watch with exceptional water resistance.",
         details: ["Waterproof to 200m", "Automatic movement", "Luminescent markers", "Stainless steel"]
       },
-      { 
-        id: 6, 
-        name: "Patek Philippe Nautilus", 
-        category: "luxury", 
-        price: 55000, 
-        image: "https://watchesbysjx.com/wp-content/uploads/2021/04/Patek-Philippe-Nautilus-Chronograph-5990-1R-rose-gold-blue-9.jpg",
+      {
+        id: 6,
+        name: "Patek Philippe Nautilus",
+        category: "luxury",
+        price: 55000,
+        image: "https://watchmydiamonds.com/wp-content/uploads/2025/02/womens_patek_philippe_nautilus.png",
         rating: 4.9,
         reviews: 45,
         description: "The Patek Philippe Nautilus is one of the most coveted luxury sports watches.",
         details: ["Self-winding movement", "Stainless steel", "Water resistant to 120m", "40mm case"]
       },
-      { 
-        id: 7, 
-        name: "Breitling Navitimer", 
-        category: "luxury", 
-        price: 8000, 
-        image: "https://www.breitling.com/media/catalog/product/cache/02cc9bfdb09b9435f3b5cde44c9c45e2/a/v/avenger-automatic-43-1.jpg",
+      {
+        id: 7,
+        name: "Breitling Navitimer",
+        category: "luxury",
+        price: 8000,
+        image: "https://cdn.clothbase.com/uploads/7535996d-7aea-411e-8fd2-1596d0f44f28/Breitling-Navitimer8-A13314-251702-230811-150519.jpg",
         rating: 4.6,
         reviews: 78,
         description: "The Breitling Navitimer is the ultimate pilot's watch with its circular slide rule.",
         details: ["Chronograph", "Slide rule bezel", "41mm case", "Sapphire crystal"]
       },
-      { 
-        id: 8, 
-        name: "Tissot Le Locle", 
-        category: "classic", 
-        price: 700, 
-        image: "https://www.tissotwatches.com/media/catalog/product/cache/fb53a4417fa7d7d29f89683dd7e03e2a/l/e/leloclepowermatic80_1.png",
+      {
+        id: 8,
+        name: "Tissot Le Locle",
+        category: "classic",
+        price: 700,
+        image: "https://assets.tissotwatches.com/transform/Extend/079a554d-0a12-42db-96be-49ed52ad665a/T006_407_36_033_00",
         rating: 4.3,
         reviews: 95,
         description: "The Tissot Le Locle combines Swiss precision with classic elegance.",
         details: ["Automatic movement", "39mm case", "Sapphire crystal", "Power reserve 80h"]
       },
-      { 
-        id: 9, 
-        name: "Longines HydroConquest", 
-        category: "sport", 
-        price: 1500, 
-        image: "https://www.longines.com/media/catalog/product/cache/1/image/800x800/9df78eab33525d08d6e5fb8d27136e95/h/y/hydroconquest-automatic-41mm-l37834566-l3-783-4-56-6.png",
+      {
+        id: 9,
+        name: "Longines HydroConquest",
+        category: "sport",
+        price: 1500,
+        image: "https://cms.longines.com/uploads/media/text-with-media/08/1098-Image-produit-l3-790-4-96-6-header.jpg?v=1-0&w=2048",
         rating: 4.5,
         reviews: 87,
         description: "The Longines HydroConquest is a high-performance diving watch.",
         details: ["Waterproof to 300m", "Automatic movement", "Ceramic bezel", "41mm case"]
       },
-      { 
-        id: 10, 
-        name: "IWC Pilot's Watch", 
-        category: "classic", 
-        price: 6500, 
-        image: "https://www.iwc.com/content/dam/iwc/iwc-master-products/pilotwatch/iwc-pilotwatch-mark-xviii-iw327010-1.jpg",
+      {
+        id: 10,
+        name: "IWC Pilot's Watch",
+        category: "classic",
+        price: 6500,
+        image: "https://b34959663f5a3997bd0d-2668915a1d3a077262c88fab6aa0aa02.ssl.cf3.rackcdn.com/17810505_1_640.jpg",
         rating: 4.7,
         reviews: 64,
         description: "The IWC Pilot's Watch features a clean, legible design inspired by aviation instruments.",
         details: ["Automatic movement", "40mm case", "Soft-iron inner case", "Sapphire crystal"]
       },
-      { 
-        id: 11, 
-        name: "Hublot Big Bang", 
-        category: "luxury", 
-        price: 12000, 
+      {
+        id: 11,
+        name: "Hublot Big Bang",
+        category: "luxury",
+        price: 12000,
         image: "https://www.hublot.com/sites/default/files/styles/watch_item_desktop_1x_scale_no_crop_600_6000_/public/big-bang-original-gold-ceramic-44-mm-301.PB.131.RX-soldier-shot.png?itok=6TbeskTd",
         rating: 4.5,
         reviews: 59,
         description: "The Hublot Big Bang features an avant-garde design with innovative materials.",
         details: ["Chronograph", "42mm case", "Skeleton dial", "Titanium case"]
       },
-      { 
-        id: 12, 
-        name: "Casio G-Shock", 
-        category: "sport", 
-        price: 200, 
-        image: "https://www.casio.com/content/dam/casio/product-info/watches/gshock/g-shock-gw-m5610-1_560x560.png",
+      {
+        id: 12,
+        name: "Casio G-Shock",
+        category: "sport",
+        price: 200,
+        image: "https://m.media-amazon.com/images/I/71SfEYT6DlL.jpg",
         rating: 4.8,
         reviews: 342,
         description: "The Casio G-Shock is the ultimate tough watch with shock resistance and multiple functions.",
         details: ["Shock resistant", "200m water resistant", "Solar powered", "Atomic timekeeping"]
       },
-      { 
-        id: 13, 
-        name: "Audemars Piguet Royal Oak", 
-        category: "luxury", 
-        price: 35000, 
-        image: "https://www.audemarspiguet.com/content/dam/ap-com/product-page-images/royal-oak/15400ST-OO-1220ST-01/15400ST-OO-1220ST-01_1.png",
+      {
+        id: 13,
+        name: "Audemars Piguet Royal Oak",
+        category: "luxury",
+        price: 35000,
+        image: "https://api.watchproject21.com/upload/626926d7dc88d2.47170925/Audemars%20Piguet%201.jpg",
         rating: 4.9,
         reviews: 38,
         description: "The Audemars Piguet Royal Oak revolutionized luxury sports watches with its octagonal bezel.",
         details: ["Automatic movement", "41mm case", "Stainless steel", "Integrated bracelet"]
       },
-      { 
-        id: 14, 
-        name: "Citizen Eco-Drive", 
-        category: "classic", 
-        price: 300, 
-        image: "https://www.citizenwatch.com/media/catalog/product/cache/0c87c48b42d46e2f468da5d294e1b6c1/b/u/bu2040-55a_01.png",
+      {
+        id: 14,
+        name: "Citizen Eco-Drive",
+        category: "classic",
+        price: 300,
+        image: "https://4.bp.blogspot.com/-XIpNGuZ3OlU/UXQ3_Ka2cNI/AAAAAAAAAXE/le7oG1_SpWk/s1600/Citizen+Men's+JY0010-50E+Eco-Drive+Skyhawk+A-T+Titanium+Watch.jpg",
         rating: 4.4,
         reviews: 156,
         description: "The Citizen Eco-Drive is powered by light, eliminating the need for battery changes.",
         details: ["Light-powered", "Perpetual calendar", "42mm case", "Stainless steel"]
       },
-      { 
-        id: 15, 
-        name: "Bell & Ross BR 03", 
-        category: "sport", 
-        price: 4000, 
-        image: "https://www.bellross.com/media/catalog/product/cache/1/image/600x600/9df78eab33525d08d6e5fb8d27136e95/br03-92-black-matte-br0392-blc-ceramic-5.png",
+      {
+        id: 15,
+        name: "Bell & Ross BR 03",
+        category: "sport",
+        price: 4000,
+        image: "https://i.pinimg.com/736x/88/ac/2e/88ac2e90a2d3df602af9ba15267384e3.jpg",
         rating: 4.5,
         reviews: 72,
         description: "The Bell & Ross BR 03 features an instrument-inspired square case design.",
         details: ["Automatic movement", "42mm case", "Matte ceramic case", "Superluminova markers"]
       },
-      { 
-        id: 16, 
-        name: "Jaeger-LeCoultre Reverso", 
-        category: "classic", 
-        price: 9000, 
-        image: "https://www.jaeger-lecoultre.com/content/dam/rcq/product-page/2338420_1080x1080.png",
+      {
+        id: 16,
+        name: "Jaeger-LeCoultre Reverso",
+        category: "classic",
+        price: 9000,
+        image: "https://cdn.clothbase.com/uploads/1e87ae52-5cc6-4332-ac60-def548639c5c/Jaeger-LeCoultre-MasterCompressor-172817M-269770-231103-105640.jpg",
         rating: 4.7,
         reviews: 53,
         description: "The Jaeger-LeCoultre Reverso features a unique reversible case originally designed for polo players.",
         details: ["Manual winding", "Art Deco design", "Reversible case", "Leather strap"]
       },
-      { 
-        id: 17, 
-        name: "Panerai Luminor", 
-        category: "luxury", 
-        price: 8500, 
-        image: "https://www.panerai.com/content/dam/panerai/product-page/luminor-1950-3-days/pam00359/pam00359_1.png",
+      {
+        id: 17,
+        name: "Panerai Luminor",
+        category: "luxury",
+        price: 8500,
+        image: "https://www.panerai.com/content/dam/rcq/pan/5l/_R/pE/8z/Sz/ap/4S/pd/Bp/TI/dQ/5l_RpE8zSzap4SpdBpTIdQ.png.transform.global_square_image_559_2x.png",
         rating: 4.6,
         reviews: 67,
         description: "The Panerai Luminor is known for its distinctive cushion-shaped case and crown protection device.",
         details: ["Automatic movement", "44mm case", "Power reserve 3 days", "Water resistant to 300m"]
       },
-      { 
-        id: 18, 
-        name: "Rolex Daytona", 
-        category: "luxury", 
-        price: 12000, 
-        image: "https://cdn.watchshopping.com/media/catalog/product/cache/ecd1d4ac8a78d4a8ec09a17c4c712f66/r/o/rolex-daytona-116500ln-1.jpg",
+      {
+        id: 18,
+        name: "Rolex Daytona",
+        category: "luxury",
+        price: 12000,
+        image: "https://images.watchfinder.co.uk/imgv3/stock/285975/Rolex-Daytona-116523-285975-240227-125154.jpg;h=850",
         rating: 4.9,
         reviews: 42,
         description: "The Rolex Daytona is the ultimate chronograph watch for motorsports enthusiasts.",
         details: ["Chronograph", "40mm case", "Ceramic bezel", "Self-winding movement"]
       },
-      { 
-        id: 19, 
-        name: "Orient Bambino", 
-        category: "classic", 
-        price: 250, 
-        image: "https://www.orientwatchusa.com/media/catalog/product/cache/77fe5f51b702e2ef14b3d208f3bf7969/b/a/bambino-2nd-gen-fac08003a0_1_1.png",
+      {
+        id: 19,
+        name: "Orient Bambino",
+        category: "classic",
+        price: 250,
+        image: "https://galeri14.uludagsozluk.com/896/orient-bambino_2357834.jpg",
         rating: 4.3,
         reviews: 128,
         description: "The Orient Bambino offers classic dress watch styling at an affordable price.",
         details: ["Automatic movement", "40.5mm case", "Domed mineral crystal", "Leather strap"]
       },
-      { 
-        id: 20, 
-        name: "Seagull 1963", 
-        category: "classic", 
-        price: 400, 
-        image: "https://www.seagullwatchstore.com/media/catalog/product/cache/77fe5f51b702e2ef14b3d208f3bf7969/1/9/1963_panda_1_1.png",
+      {
+        id: 20,
+        name: "Seagull 1963",
+        category: "classic",
+        price: 400,
+        image: "https://seagull1963.com/cdn/shop/files/40mm_Creame.png?v=1722407053",
         rating: 4.4,
         reviews: 96,
         description: "The Seagull 1963 is a reissue of China's first chronograph watch with a distinctive panda dial.",
         details: ["Manual winding chronograph", "38mm case", "Acrylic crystal", "NATO strap"]
       },
-      { 
-        id: 21, 
-        name: "Richard Mille RM 011", 
-        category: "luxury", 
-        price: 150000, 
-        image: "https://www.richardmille.com/sites/default/files/styles/product_detail/public/rm-011_flyback_chronograph_titanium_white_0.png",
+      {
+        id: 21,
+        name: "Richard Mille RM 011",
+        category: "luxury",
+        price: 150000,
+        image: "https://b0650f7f058d5f70d743-97d5bb3f4194bc3eff7a94253e4a4e28.ssl.cf1.rackcdn.com/107933_MAIN_847.jpg",
         rating: 4.8,
         reviews: 12,
         description: "The Richard Mille RM 011 features an ultra-lightweight case and advanced flyback chronograph.",
         details: ["Flyback chronograph", "Titanium case", "Annual calendar", "Power reserve 55h"]
       },
-      { 
-        id: 22, 
-        name: "Grand Seiko SBGA211", 
-        category: "luxury", 
-        price: 6500, 
-        image: "https://www.grand-seiko.com/content/dam/grandseiko/en/product/SBGA211G/SBGA211G_2.png",
+      {
+        id: 22,
+        name: "Grand Seiko SBGA211",
+        category: "luxury",
+        price: 6500,
+        image: "https://images.watchfinder.co.uk/imgv2/stock/174180/GrandSeiko-SpringDrive-SBGA211G-174180-2-201210-154716.jpg",
         rating: 4.8,
         reviews: 58,
         description: "The Grand Seiko SBGA211 features the brand's signature Spring Drive movement with unparalleled accuracy.",
         details: ["Spring Drive movement", "41mm case", "72h power reserve", "Zaratsu polished case"]
       },
-      { 
-        id: 23, 
-        name: "Invicta Pro Diver", 
-        category: "sport", 
-        price: 150, 
-        image: "https://www.invictawatch.com/media/catalog/product/cache/1/image/600x600/9df78eab33525d08d6e5fb8d27136e95/0070_1.png",
+      {
+        id: 23,
+        name: "Invicta Pro Diver",
+        category: "sport",
+        price: 150,
+        image: "https://m.media-amazon.com/images/I/715EFfB-mEL._AC_SL1500_.jpg",
         rating: 4.2,
         reviews: 187,
         description: "The Invicta Pro Diver offers professional dive watch features at an entry-level price.",
         details: ["Water resistant to 200m", "Automatic movement", "Unidirectional bezel", "Stainless steel"]
       },
-      { 
-        id: 24, 
-        name: "Montblanc Timewalker", 
-        category: "classic", 
-        price: 4200, 
-        image: "https://www.montblanc.com/media/catalog/product/cache/8d78582a51182b1e4db0f7e230cfe3e2/timewalker-chronograph-automatic-43-mm-118495_1_1.png",
+      {
+        id: 24,
+        name: "Montblanc Timewalker",
+        category: "classic",
+        price: 4200,
+        image: "https://www.watchonista.com/sites/default/files/watchographer/816/watches/446097/pictures/timewalker_116096.jpg",
         rating: 4.5,
         reviews: 49,
         description: "The Montblanc Timewalker combines motorsport-inspired design with Swiss watchmaking.",
         details: ["Automatic chronograph", "43mm case", "Tachymeter scale", "Sapphire crystal"]
       },
-      { 
-        id: 25, 
-        name: "Fossil Grant", 
-        category: "classic", 
-        price: 160, 
-        image: "https://www.fossil.com/on/demandware.static/-/Sites-fossil-master-catalog/default/dw50d42a09/zoom/FS5151_main.png",
+      {
+        id: 25,
+        name: "Fossil Grant",
+        category: "classic",
+        price: 160,
+        image: "https://cdn2.jomashop.com/media/catalog/product/f/o/fossil-grant-multi-function-navy-dial-navy-leather-mens-watch-fs4835.jpg",
         rating: 4.1,
         reviews: 213,
         description: "The Fossil Grant offers classic American watch design with reliable quartz movement.",
         details: ["Quartz movement", "44mm case", "Mineral crystal", "Leather strap"]
       },
-      { 
-        id: 26, 
-        name: "Hublot Classic Fusion", 
-        category: "luxury", 
-        price: 9000, 
+      {
+        id: 26,
+        name: "Hublot Classic Fusion",
+        category: "luxury",
+        price: 9000,
         image: "https://thumuadongho.com.vn/wp-content/uploads/2023/01/Hublot-Classic-Fusion-Aerofusion-King-Gold-Diamonds.png",
         rating: 4.6,
         reviews: 41,
         description: "The Hublot Classic Fusion combines traditional watchmaking with contemporary design.",
         details: ["Automatic movement", "42mm case", "Titanium case", "Sapphire crystal"]
       },
-      { 
-        id: 27, 
-        name: "Swatch Sistem51", 
-        category: "sport", 
-        price: 200, 
-        image: "https://timeandtidewatches.com/wp-content/uploads/2014/09/KD12266-845x562.jpg",
+      {
+        id: 27,
+        name: "Swatch Sistem51",
+        category: "sport",
+        price: 200,
+        image: "https://90grados.com/wp-content/uploads/sites/12/2019/01/sa05_sutz404_Web.jpg",
         rating: 4.3,
         reviews: 145,
         description: "The Swatch Sistem51 features a fully automated mechanical movement with 90-hour power reserve.",
         details: ["Automatic movement", "42mm case", "90h power reserve", "Plastic case"]
       },
-      { 
-        id: 28, 
-        name: "Citizen Promaster", 
-        category: "sport", 
-        price: 600, 
+      {
+        id: 28,
+        name: "Citizen Promaster",
+        category: "sport",
+        price: 600,
         image: "//cdn.idealo.com/folder/Product/203550/5/203550594/s3_produktbild_max/citizen-promaster-automatic-ny0120-01ee.jpg",
         rating: 4.5,
         reviews: 87,
         description: "The Citizen Promaster is a professional diver's watch with Eco-Drive technology.",
         details: ["Eco-Drive movement", "Water resistant to 200m", "Unidirectional bezel", "Stainless steel"]
       },
-      { 
-        id: 29, 
-        name: "Maurice Lacroix Aikon", 
-        category: "classic", 
-        price: 1900, 
-        image: "https://monochrome-watches.com/wp-content/uploads/2020/08/Maurice-Lacroix-Aikon-Automatic-39mm-hands-on-7.jpg",
+      {
+        id: 29,
+        name: "Maurice Lacroix Aikon",
+        category: "classic",
+        price: 1900,
+        image: "https://prodauronosstorage.blob.core.windows.net/universe-images/239-AA659C8E34C4EBCDDB9364F87C9EF732.jpg",
         rating: 4.4,
         reviews: 63,
         description: "The Maurice Lacroix Aikon features an integrated bracelet design inspired by 90s classics.",
         details: ["Automatic movement", "39mm case", "Integrated bracelet", "Sapphire crystal"]
       },
-      { 
-        id: 30, 
-        name: "Citizen Nighthawk", 
-        category: "sport", 
-        price: 350, 
+      {
+        id: 30,
+        name: "Citizen Nighthawk",
+        category: "sport",
+        price: 350,
         image: "https://www.firstclasswatches.co.uk/blog/wp-content/uploads/2017/08/CA4377-53H.jpg",
         rating: 4.6,
         reviews: 132,
@@ -702,7 +848,7 @@
       }
     ];
 
-    const productsPerPage = 8; 
+    const productsPerPage = 8;
     let currentPage = 1;
     let cart = [];
 
@@ -716,6 +862,11 @@
     const sortSelect = document.getElementById('sortSelect');
     const loadingOverlay = document.querySelector('.loading-overlay');
     const cartCount = document.querySelector('.cart-count');
+    const cartModal = new bootstrap.Modal(document.getElementById('cartModal'));
+    const cartItemsContainer = document.getElementById('cartItemsContainer');
+    const cartTotal = document.getElementById('cartTotal');
+    const emptyCartMessage = document.getElementById('emptyCartMessage');
+    const checkoutBtn = document.getElementById('checkoutBtn');
 
     function showLoading() {
       loadingOverlay.style.display = 'flex';
@@ -734,22 +885,22 @@
       const maxPrice = Number(priceRange.value);
       const searchTerm = searchInput.value.toLowerCase();
       const sortOption = sortSelect.value;
-      
+
       return { selectedCategories, maxPrice, searchTerm, sortOption };
     }
 
     function getFilteredProducts() {
       const { selectedCategories, maxPrice, searchTerm, sortOption } = getFilters();
-      
-      let filtered = products.filter(p => 
-        selectedCategories.includes(p.category) && 
+
+      let filtered = products.filter(p =>
+        selectedCategories.includes(p.category) &&
         p.price <= maxPrice &&
-        (p.name.toLowerCase().includes(searchTerm) || 
-         p.description.toLowerCase().includes(searchTerm))
+        (p.name.toLowerCase().includes(searchTerm) ||
+          p.description.toLowerCase().includes(searchTerm))
       );
 
       // Sorting
-      switch(sortOption) {
+      switch (sortOption) {
         case 'price-asc':
           filtered.sort((a, b) => a.price - b.price);
           break;
@@ -770,39 +921,39 @@
     }
 
     function renderStarRating(rating) {
-            const fullStars = Math.floor(rating);
+      const fullStars = Math.floor(rating);
       const hasHalfStar = rating % 1 >= 0.5;
       let stars = '';
-      
+
       for (let i = 0; i < fullStars; i++) {
         stars += '<i class="fas fa-star"></i>';
       }
-      
+
       if (hasHalfStar) {
         stars += '<i class="fas fa-star-half-alt"></i>';
       }
-      
+
       const emptyStars = 5 - Math.ceil(rating);
       for (let i = 0; i < emptyStars; i++) {
         stars += '<i class="far fa-star"></i>';
       }
-      
+
       return stars;
     }
 
     function renderProducts(page = 1) {
       showLoading();
-      
+
       const filteredProducts = getFilteredProducts();
       const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
       currentPage = Math.min(page, totalPages);
-      
+
       const startIndex = (currentPage - 1) * productsPerPage;
       const endIndex = startIndex + productsPerPage;
       const paginatedProducts = filteredProducts.slice(startIndex, endIndex);
-      
+
       productContainer.innerHTML = '';
-      
+
       if (paginatedProducts.length === 0) {
         productContainer.innerHTML = `
           <div class="col-12 text-center py-5">
@@ -829,7 +980,7 @@
                 </div>
                 <p class="product-description">${product.description}</p>
                 <button class="btn btn-add-to-cart" data-id="${product.id}">
-                  Add to Cart
+                  <i class="fas fa-shopping-cart"></i> Add to Cart
                 </button>
               </div>
             </div>
@@ -837,7 +988,7 @@
           productContainer.appendChild(productCard);
         });
       }
-      
+
       renderPagination(filteredProducts.length);
       hideLoading();
     }
@@ -845,9 +996,9 @@
     function renderPagination(totalProducts) {
       const totalPages = Math.ceil(totalProducts / productsPerPage);
       paginationContainer.innerHTML = '';
-      
+
       if (totalPages <= 1) return;
-      
+
       // Previous button
       const prevLi = document.createElement('li');
       prevLi.className = `page-item ${currentPage === 1 ? 'disabled' : ''}`;
@@ -861,7 +1012,7 @@
         if (currentPage > 1) renderProducts(currentPage - 1);
       });
       paginationContainer.appendChild(prevLi);
-      
+
       // Page numbers
       for (let i = 1; i <= totalPages; i++) {
         const pageLi = document.createElement('li');
@@ -873,7 +1024,7 @@
         });
         paginationContainer.appendChild(pageLi);
       }
-      
+
       // Next button
       const nextLi = document.createElement('li');
       nextLi.className = `page-item ${currentPage === totalPages ? 'disabled' : ''}`;
@@ -892,14 +1043,14 @@
     function addToCart(productId) {
       const product = products.find(p => p.id === productId);
       if (!product) return;
-      
+
       const existingItem = cart.find(item => item.id === productId);
       if (existingItem) {
         existingItem.quantity++;
       } else {
         cart.push({ ...product, quantity: 1 });
       }
-      
+
       updateCartCount();
       showToast(`${product.name} added to cart`);
     }
@@ -907,6 +1058,49 @@
     function updateCartCount() {
       const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
       cartCount.textContent = totalItems;
+    }
+
+    function renderCartItems() {
+      if (cart.length === 0) {
+        emptyCartMessage.style.display = 'block';
+        cartItemsContainer.innerHTML = '';
+        cartTotal.textContent = '$0.00';
+        checkoutBtn.disabled = true;
+        return;
+      }
+
+      emptyCartMessage.style.display = 'none';
+      checkoutBtn.disabled = false;
+      
+      cartItemsContainer.innerHTML = '';
+      
+      let total = 0;
+      
+      cart.forEach(item => {
+        const itemTotal = item.price * item.quantity;
+        total += itemTotal;
+        
+        const cartItem = document.createElement('div');
+        cartItem.className = 'cart-item';
+        cartItem.innerHTML = `
+          <img src="${item.image}" alt="${item.name}" class="cart-item-img">
+          <div class="cart-item-details">
+            <div class="cart-item-title">${item.name}</div>
+            <div class="cart-item-price">$${item.price.toLocaleString()}</div>
+          </div>
+          <div class="cart-item-quantity">
+            <button class="decrease-quantity" data-id="${item.id}">-</button>
+            <input type="text" value="${item.quantity}" readonly>
+            <button class="increase-quantity" data-id="${item.id}">+</button>
+          </div>
+          <div class="remove-item" data-id="${item.id}">
+            <i class="fas fa-trash"></i>
+          </div>
+        `;
+        cartItemsContainer.appendChild(cartItem);
+      });
+      
+      cartTotal.textContent = `$${total.toLocaleString()}`;
     }
 
     function showToast(message) {
@@ -924,9 +1118,9 @@
           </div>
         </div>
       `;
-      
+
       document.body.appendChild(toast);
-      
+
       setTimeout(() => {
         toast.remove();
       }, 3000);
@@ -935,37 +1129,82 @@
     // Event Listeners
     document.addEventListener('DOMContentLoaded', () => {
       renderProducts();
-      
+
       // Update max price display
       priceRange.addEventListener('input', () => {
         maxPriceDisplay.textContent = `$${Number(priceRange.value).toLocaleString()}`;
       });
-      
+
       // Apply filters button
       applyFiltersBtn.addEventListener('click', () => {
         renderProducts(1);
       });
-      
+
       // Search input
       searchInput.addEventListener('keyup', (e) => {
         if (e.key === 'Enter') {
           renderProducts(1);
         }
       });
-      
+
       // Sort select
       sortSelect.addEventListener('change', () => {
         renderProducts(1);
       });
-      
+
       // Add to cart buttons (delegated)
       productContainer.addEventListener('click', (e) => {
-        if (e.target.classList.contains('btn-add-to-cart')) {
-          const productId = Number(e.target.getAttribute('data-id'));
+        if (e.target.classList.contains('btn-add-to-cart') || e.target.closest('.btn-add-to-cart')) {
+          const btn = e.target.classList.contains('btn-add-to-cart') ? e.target : e.target.closest('.btn-add-to-cart');
+          const productId = Number(btn.getAttribute('data-id'));
           addToCart(productId);
+        }
+      });
+
+      // Cart link
+      document.getElementById('cartLink').addEventListener('click', (e) => {
+        e.preventDefault();
+        renderCartItems();
+        cartModal.show();
+      });
+
+      // Cart item interactions (delegated)
+      cartItemsContainer.addEventListener('click', (e) => {
+        const productId = Number(e.target.getAttribute('data-id') || e.target.closest('[data-id]')?.getAttribute('data-id'));
+        if (!productId) return;
+
+        if (e.target.classList.contains('decrease-quantity') || e.target.closest('.decrease-quantity')) {
+          const item = cart.find(item => item.id === productId);
+          if (item.quantity > 1) {
+            item.quantity--;
+          } else {
+            cart = cart.filter(item => item.id !== productId);
+          }
+          renderCartItems();
+          updateCartCount();
+        } else if (e.target.classList.contains('increase-quantity') || e.target.closest('.increase-quantity')) {
+          const item = cart.find(item => item.id === productId);
+          item.quantity++;
+          renderCartItems();
+          updateCartCount();
+        } else if (e.target.classList.contains('remove-item') || e.target.closest('.remove-item')) {
+          cart = cart.filter(item => item.id !== productId);
+          renderCartItems();
+          updateCartCount();
+          showToast('Item removed from cart');
+        }
+      });
+
+      // Checkout button
+      checkoutBtn.addEventListener('click', () => {
+        if (cart.length > 0) {
+          // In a real app, you would redirect to checkout page
+          alert('Proceeding to checkout with ' + cart.reduce((sum, item) => sum + item.quantity, 0) + ' items');
+          cartModal.hide();
         }
       });
     });
   </script>
 </body>
+
 </html>
